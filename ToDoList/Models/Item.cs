@@ -32,26 +32,25 @@ namespace ToDoList.Models
         public static List<Item> GetAll()
         {
             List<Item> allItems = new List<Item> {};
-//             cd ..MySqlConnection conn = DB.Connection();
-//             conn.Open();
-//             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-//
-// //SQL command. Teslls MySQL to select and return all entries in the items table.
-//             cmd.CommandText = @"SELECT * FROM items;";
-//
-//             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-//             while(rdr.Read())
-//             {
-//               int itemId = rdr.GetInt32(0);
-//               string itemDescription = rdr.GetString(1);
-//               Item newItem = new Item(itemDescription, itemId);
-//               allItems.Add(newItem);
-//             }
-//             conn.Close();
-//             if (conn != null)
-//             {
-//                 conn.Dispose();
-//             }
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+
+//SQL command. Teslls MySQL to select and return all entries in the items table.
+            cmd.CommandText = @"SELECT * FROM items;";
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+              int itemId = rdr.GetInt32(0);
+              string itemDescription = rdr.GetString(1);
+              Item newItem = new Item(itemDescription, itemId);
+              allItems.Add(newItem);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
             return allItems;
             //return _instances;
         }
