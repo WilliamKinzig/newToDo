@@ -21,7 +21,17 @@ namespace ToDoList.Tests
           Assert.AreEqual(0, result);
         }
 
+//this method requires: ToDoList/Models/Item.cs - public override bool Equals(System.Object otherItem) .. to PASS
+        [TestMethod]
+        public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Item()
+        {
+          // Arrange, Act
+          Item firstItem = new Item("Mow the lawn");
+          Item secondItem = new Item("Mow the lawn");
 
+          // Assert
+          Assert.AreEqual(firstItem, secondItem);
+        }
 
         public void Dispose()
         {

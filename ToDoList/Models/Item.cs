@@ -28,6 +28,20 @@ namespace ToDoList.Models
             return _id;
         }
 
+        public override bool Equals(System.Object otherItem)
+        {
+          if (!(otherItem is Item))
+          {
+            return false;
+          }
+          else
+          {
+            Item newItem = (Item) otherItem;
+            bool descriptionEquality = (this.GetDescription() == newItem.GetDescription());
+
+            return (descriptionEquality);
+          }
+        }
 
         public static List<Item> GetAll()
         {
