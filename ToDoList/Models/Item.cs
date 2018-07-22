@@ -91,10 +91,19 @@ namespace ToDoList.Models
        {
            MySqlConnection conn = DB.Connection();
            conn.Open();
+
+// create 'cmd' using conn.CreateCommand()    cast it to a MySqlCommandt object.
            var cmd = conn.CreateCommand() as MySqlCommand;
+
+// declate the COmmandText property of our cmd object  set it to SQL command
            cmd.CommandText = @"SELECT * FROM items WHERE id = @thisId;";
+
            MySqlParameter thisId = new MySqlParameter();
+
+//difine the ParameterName property of thisId as @thisId from above
            thisId.ParameterName = "@thisId";
+
+
            thisId.Value = id;
            cmd.Parameters.Add(thisId);
            var rdr = cmd.ExecuteReader() as MySqlDataReader;
