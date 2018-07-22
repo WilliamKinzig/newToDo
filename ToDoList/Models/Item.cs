@@ -30,17 +30,17 @@ namespace ToDoList.Models
 
         public override bool Equals(System.Object otherItem)
         {
-          if (!(otherItem is Item))
-          {
-            return false;
-          }
-          else
-          {
-            Item newItem = (Item) otherItem;
-            bool descriptionEquality = (this.GetDescription() == newItem.GetDescription());
-
-            return (descriptionEquality);
-          }
+            if (!(otherItem is Item))
+            {
+              return false;
+            }
+            else
+            {
+              Item newItem = (Item) otherItem;
+              bool idEquality = (this.GetId() == newItem.GetId());
+              bool descriptionEquality = (this.GetDescription() == newItem.GetDescription());
+              return (idEquality && descriptionEquality);
+            }
         }
 
         public static List<Item> GetAll()
@@ -114,6 +114,30 @@ namespace ToDoList.Models
            return foundItem;
        }
 
+
+       public void Save()
+       {
+           MySqlConnection conn = DB.Connection();
+           conn.Open();
+
+// casting to the MySql data type.  Database requires this.
+           var cmd = conn.CreateCommand() as MySqlCommand;
+           cmd.CommandText = @"INSERT INTO `items` (`description`) VALUES (@ItemDescription);";//place holder
+
+           MySqlParameter description = new MySqlParameter();
+           description.ParameterName = "@ItemDescription";
+           description.Value = this._description;
+           cmd.Parameters.Add(description);
+
+           cmd.ExecuteNonQuery();//modify the database
+           _id = (int)cmd.LastInsertedId;
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+       }
         // public static void ClearAll()
         // {
         //     _instances.Clear();
