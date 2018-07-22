@@ -1,0 +1,23 @@
+To Do List Testing
+
+model
+Item.cs
+
+public Item (string description)
+GetDescription()
+
+model test
+Item.Tests
+
+GetDescription_ReturnsDescription_String()
+
+cd desktop/b/todo.tests
+dotnet restore
+dotnet test
+
+//
+
+
+
+
+

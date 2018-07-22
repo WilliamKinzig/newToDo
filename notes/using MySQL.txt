@@ -1,0 +1,231 @@
+CONNECT THROUGH COMMAND PROMPT
+
+navigate to: C:\MAMP\bin\mysql\bin
+
+	cd C:\MAMP\bin\mysql\bin
+
+	cd .. cd 
+	
+then run this command in the command prompt
+
+	mysql -uroot -proot -P8889
+or
+	mysql -uroot -proot
+
+
+
+prompt should now look like
+mysql>
+
+to quit run:
+> \q
+
+//////////////////////////////////// database MySQL QUERIES AND MORE ////////////////////////////////////////////////////////
+
+SQL Command Format
+SELECT <expressions> FROM <tables> WHERE <conditions> AND <conditions> ORDER BY <expressions> <asc or desc>;
+
+
+
+
+mysql>
+
+> SELECT DATABASE();
+
+> CREATE DATABASE name_here;
+
+> SHOW DATABASES;
+
+> USE test_database;
+
+> CREATE TABLE contacts (name VARCHAR (255), age INT, birthday DATETIME);
+
+> ALTER TABLE contacts ADD favorite_color TEXT;
+> ALTER TABLE contacts DROP favorite_color;
+> ALTER TABLE contacts ADD id serial PRIMARY KEY;
+
+
+INSERTING DATA
+> INSERT INTO contacts (name, age, birthday) VALUES ('Wes', 43, '1969-05-01');
+
+RETRIEVING IDs
+> INSERT INTO contacts (name, age, birthday) VALUES (‘Tanner’, 26, ‘1988-12-09’);
+> SELECT LAST_INSERT_ID();
+
+QUERYING
+> SELECT name FROM contacts;
+
+
+
+> SELECT name, birthday FROM contacts;
+
+> SELECT * FROM contacts;
+> SELECT * FROM contacts WHERE age >= 18;
+
+> SELECT * FROM contacts WHERE age BETWEEN 13 AND 17;  
+> SELECT * FROM contacts WHERE name BETWEEN 'Judith' AND 'Wilma';
+> SELECT * FROM contacts WHERE name LIKE 'We%';
+> SELECT * FROM contacts WHERE birthday IN ('1969-01-01', '1999-01-01');
+
+> UPDATE contacts SET name = 'Wes Anderson' WHERE id = 1;
+
+
+DELETEING RECORDS
+> DELETE FROM contacts WHERE id = 1;
+
+
+DROPPING DATABASES
+> DROP DATABASE test_database;
+
+
+SQL Command Format
+SELECT <expressions> FROM <tables> WHERE <conditions> AND <conditions> ORDER BY <expressions> <asc or desc>;
+
+
+
+SELECT
+
+SELECT descriptions FROM items;
+
+FROM
+
+SELECT * FROM items;
+
+SELECT * FROM categories;
+
+WHERE
+
+SELECT * FROM items WHERE categoryId=5;
+
+WHERE clauses may contain the following operators:
+
+= Equals
+
+SELECT * FROM kittens WHERE age = 1;
+<> Not Equal
+In some versions of SQL, this may be written as !=. 
+
+SELECT * FROM kittens WHERE age <> 1;
+
+SELECT * FROM kittens WHERE age != 1;
+
+SELECT * FROM kittens WHERE age > 2;
+
+SELECT * FROM kittens WHERE age < 7;
+
+SELECT * FROM kittens WHERE age >= 9;
+
+SELECT * FROM kittens WHERE age <= 9;
+BETWEEN
+
+
+SELECT * FROM kittens WHERE age BETWEEN 1 AND 3;
+LIKE
+
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;
+
+
+% Wildcard
+The % symbol is used as a wildcard before and/or after the pattern.
+
+name column contains a value beginning with s :
+SELECT * FROM kittens WHERE name LIKE 's%';
+
+kittens table whose name column contains a value ending with burt :
+SELECT * FROM kittens WHERE name LIKE '%burt';
+
+_ Wildcard
+The _ symbol is a substitute for a single character.
+
+name column contains a value beginning with any single letter, but followed by "amson":
+SELECT * FROM kittens WHERE name LIKE '_amson';
+
+
+
+[charlist] Wildcard
+
+name column contains a value beginning with either a, b, or s:
+SELECT * FROM kittens WHERE name LIKE '[abs]%';
+
+name column contains a value beginning with either a, b, or c:
+SELECT * FROM kittens WHERE name LIKE '[a-c]%';
+IN
+
+
+
+
+color column contains either grey, or orange:
+SELECT * FROM kittens WHERE color IN ('orange', 'grey');
+AND
+
+SELECT * FROM kittens WHERE name LIKE 's%' AND color IN ('orange', 'grey');
+
+
+ORDER BY
+SQL's ORDER BY can be used to sort data returned in ascending or descending order based on a column. It is added to the end of a query.
+
+SELECT * FROM kittens WHERE name LIKE 's%' AND color IN ('orange', 'grey') ORDER BY id;
+
+SELECT * FROM kittens WHERE age > 2 ORDER BY name;
+
+
+ASC / DESC
+SELECT * FROM kittens WHERE age > 2 ORDER BY name DESC;
+
+SELECT DISTINCT
+
+SELECT DISTINCT name FROM kittens;
+
+SELECT DISTINCT
+We can use SQL to efficiently reduce our dataset down to only unique values. 
+This is especially useful when we didn't prevent users from entering duplicates.
+
+SELECT DISTINCT name FROM kittens;
+The query above can also be combined with many other queries on this page - 
+such as alphabetical sorting, WHERE, ORDER BY, etc.
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+http://localhost:8888/MAMP/
+
+Tools:
+  phpMyAdmin
+
+Never alter the 
+  - information_schema
+  - mysql
+  - performance_schema
+  - test databases in phpMyAdmin.
+
+Create database
+ Database: Name todo
+ Collation: utf8_general_ci 
+
+- Create a table called items and give it 2 columns.
+
+- Click Create to generate the table with 2 undefined columns.
+
+Each column must have a name and type in order to be generated
+
+- Add an id column and select type INT from the dropdown.  Id will act as our primary key.
+    check the auto increment
+    select PRIMARY from the dropdown menu under Index
+
+- Add in a description
+    Select VARCHAR as the data type 
+    set Length/Values value of 255.
+
+- click the Preview SQL button on the bottom right of the page
+
+- Click the Save button on the bottom right to generate this table. You will still be able to edit the table.
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+- Navigate to project 'todolist'
+
+- In the project folder run: 
+    > dotnet add package MySqlConnector
+    > dotnet restore
+
