@@ -173,6 +173,9 @@ namespace ToDoList.Models
                 conn.Dispose();
             }
        }
+
+
+
         // public static void ClearAll()
         // {
         //     _instances.Clear();
